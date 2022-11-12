@@ -16,6 +16,38 @@ namespace ArgumentParser
 		/// </summary>
 		/// <param name="args">Program arguments</param>
 		/// <param name="container">Container to store the results.</param>
+		public static void Parse(string[] args, AbstractParameters container)
+		{
+			Parse(args, container, s => { }, (k, v) => { });
+		}
+
+		/// <summary>
+		/// Parse the arguments in the specified format.
+		/// </summary>
+		/// <param name="args">Program arguments</param>
+		/// <param name="container">Container to store the results.</param>
+		/// <param name="onFormatError">Callback when format error.</param>
+		public static void Parse(string[] args, AbstractParameters container, Action<string> onFormatError)
+		{
+			Parse(args, container, onFormatError, (k, v) => { });
+		}
+
+		/// <summary>
+		/// Parse the arguments in the specified format.
+		/// </summary>
+		/// <param name="args">Program arguments</param>
+		/// <param name="container">Container to store the results.</param>
+		/// <param name="onUnknownParam">Callback when key was not registered.</param>
+		public static void Parse(string[] args, AbstractParameters container, Action<string, string> onUnknownParam)
+		{
+			Parse(args, container, s => { }, onUnknownParam);
+		}
+
+		/// <summary>
+		/// Parse the arguments in the specified format.
+		/// </summary>
+		/// <param name="args">Program arguments</param>
+		/// <param name="container">Container to store the results.</param>
 		/// <param name="onFormatError">Callback when format error.</param>
 		/// <param name="onUnknownParam">Callback when key was not registered.</param>
 		public static void Parse(string[] args, AbstractParameters container, Action<string> onFormatError, Action<string, string> onUnknownParam)
